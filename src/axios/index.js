@@ -1,5 +1,5 @@
 import axios from "axios";
-import { MessageBox } from 'mint-ui';
+import { AlertModule } from 'vux'
 
 // 引入常量模块
 import Constants from '@/Constants.vue';
@@ -24,7 +24,11 @@ axios.interceptors.response.use(function(response) {
 		// 如果是成功返回信息之后提取出来返回以供后面的调用链使用(后台返回的JSON数据)
 		return response.data;
 	} else {
-		MessageBox.alert(response.data.msg);
+		AlertModule.show({
+			title: "提示信息",
+			content: response.data.msg
+		});
+
 		return new Promise(function(resolve, reject) {
 			//                    resolve('success1');
 			//                  reject('error');

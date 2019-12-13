@@ -16,11 +16,30 @@ const routes = [{
 			import( /* webpackChunkName: "about" */ '../views/AdminHome.vue'),
 		redirect: '/admin/user',
 		children: [{
-			path: 'user',
-			name: 'user',
-			component: () =>
-				import( /* webpackChunkName: "about" */ '../views/admin/User.vue')
-		}]
+				path: 'kindergarten',
+				name: 'kindergarten',
+				component: () =>
+					import( /* webpackChunkName: "about" */ '../views/admin/Kindergarten.vue')
+			},
+			{
+				path: 'pays',
+				name: 'pays',
+				component: () =>
+					import( /* webpackChunkName: "about" */ '../views/admin/Pays.vue')
+			},
+			{
+				path: 'settings',
+				name: 'settings',
+				component: () =>
+					import( /* webpackChunkName: "about" */ '../views/admin/Settings.vue')
+			},
+			{
+				path: 'user',
+				name: 'user',
+				component: () =>
+					import( /* webpackChunkName: "about" */ '../views/admin/User.vue')
+			}
+		]
 	},
 	{
 		path: '/plain',

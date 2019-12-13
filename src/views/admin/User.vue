@@ -8,7 +8,7 @@
 	import store from '@/store';
 
 	export default {
-		name: 'User',
+		name: 'user',
 		store,
 		methods: {
 			getLoginUsername() {

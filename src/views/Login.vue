@@ -1,27 +1,27 @@
 <template>
 	<div class="login">
 		<form v-if="!isReg">
-			<h1>欢迎来到XXX系统</h1>
+			<group title="登录" label-align="left" label-width="80px" key="login">
+				<x-input required text-align="left" title="用户名" placeholder="Input username" v-model="username"></x-input>
+				<x-input required text-align="left" title="密    码" placeholder="Input password" type="password" v-model="password"></x-input>
+			</group>
+			<x-button action-type="button" type="primary" @click.native="login()" key="login">登录</x-button>
 			<br/>
-			<mt-field label="用户名" placeholder="Input username" v-model="username"></mt-field>
-			<mt-field label="密    码" placeholder="Input password" type="password" v-model="password"></mt-field>
-			<mt-button size="large" type="primary" @click.prevent="login()" key="login">登录</mt-button>
+			<x-button action-type="button" type="default" @click.native="reg()" key="reg" plain>注册</x-button>
 			<br/>
-			<mt-button size="large" type="default" @click.prevent="reg()" key="reg" plain>注册</mt-button>
-			<br/>
-
 		</form>
 		<div v-else>
-			<h1>注册</h1>
-			<mt-field label="用户名" placeholder="Input username" v-model="username"></mt-field>
-			<mt-field label="用户姓名" placeholder="Input fullname" v-model="fullname"></mt-field>
-			<mt-field label="密    码" placeholder="Input password" type="password" v-model="password"></mt-field>
-			<mt-field label="电    话" placeholder="Input phone" v-model="phone"></mt-field>
-			<mt-radio title="性    别" v-model="sex" :options="sexOptions" align="right">
-			</mt-radio>
-			<mt-button size="large" type="primary" @click="addUser()" key="doReg">注册</mt-button>
+			<group title="注册" label-align="left" label-width="80px" key="reg">
+				<x-input required title="用户名" placeholder="Input username" v-model="username"></x-input>
+				<x-input required title="用户姓名" placeholder="Input fullname" v-model="fullname"></x-input>
+				<x-input required title="密    码" placeholder="Input password" type="password" v-model="password"></x-input>
+				<x-input required title="电    话" placeholder="Input phone" v-model="phone"></x-input>
+				<mt-radio required title="性    别" v-model="sex" :options="sexOptions" align="right">
+				</mt-radio>
+			</group>
+			<x-button type="primary" @click.native="addUser()" key="doReg">注册</x-button>
 			<br/>
-			<mt-button size="large" type="default" @click="cancel()" key="cancel" plain>取消</mt-button>
+			<x-button type="default" @click.native="cancel()" key="cancel" plain>取消</x-button>
 		</div>
 
 	</div>
@@ -70,7 +70,8 @@
 				});
 
 				if(response.success) {
-					Toast("登录成功");
+					// 显示文字
+					this.$vux.toast.text('登录成功');
 
 					// 将用户存入localStorage
 					var roles = response.data.roles;
