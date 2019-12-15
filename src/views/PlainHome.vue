@@ -1,55 +1,37 @@
 <template>
-	<div class="home">
-		<mt-header title="XXX管理系统">
-			<router-link to="/" slot="left">
-				<mt-button icon="back">back</mt-button>
-			</router-link>
-			<mt-button icon="more" slot="right"></mt-button>
-		</mt-header>
+	<div class="plainHome" style="height:100%;">
+		<view-box ref="viewBox" body-padding-top="45px" body-padding-bottom="60px">
+			<x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;" :right-options="{showMore: true}" @on-click-more="showMenus = true">幼儿园缴费系统</x-header>
 
-		<router-view/>
-		<ul class="footer">
-			<router-link class="icons" to="/home/user">个人中心</router-link>
-			<router-link class="icons" to="/home/contact">通讯录</router-link>
-		</ul>
+			<router-view class="router-view"></router-view>
+
+			<tabbar slot="bottom">
+				<tabbar-item link="/plain/pays">
+					<img slot="icon" src="../assets/icon_nav_msg.png">
+					<span slot="label">缴费明细</span>
+				</tabbar-item>
+				<tabbar-item selected link="/plain/pay">
+					<img slot="icon" src="@/assets/icon_nav_cell.png">
+					<span slot="label">缴费</span>
+				</tabbar-item>
+				<tabbar-item selected link="/plain/user">
+					<img slot="icon" src="@/assets/icon_nav_cell.png">
+					<span slot="label">我</span>
+				</tabbar-item>
+			</tabbar>
+		</view-box>
 	</div>
 </template>
 
 <script>
 	export default {
-		name: 'home',
+		name: 'plainHome',
 	};
 </script>
 
-<style scoped lang="scss">
-	li {
-		list-style: none;
-	}
-	
-	.footer {
-		position: fixed;
+<style>
+	.router-view {
 		width: 100%;
-		height: 60px;
-		line-height: 60px;
-		left: 0px;
-		bottom: 0px;
-		display: flex;
-		flex-flow: row nowrap;
-		justify-content: space-around;
-	}
-	
-	.icons {
-		font-size: 16px;
-		flex: 1;
-		text-align: center;
-		border-top: 1px solid #42b983;
-	}
-	
-	a {
-		color: #42b983;
-		&.active {
-			color: #fff;
-			background: #42b983;
-		}
+		top: 46px;
 	}
 </style>

@@ -5,9 +5,9 @@
 				<x-input required text-align="left" title="用户名" placeholder="Input username" v-model="username"></x-input>
 				<x-input required text-align="left" title="密    码" placeholder="Input password" type="password" v-model="password"></x-input>
 			</group>
-			<x-button action-type="button" type="primary" @click.native="login()" key="login">登录</x-button>
+			<x-button action-type="button" type="primary" @click.native="login()" key="loginBtn">登录</x-button>
 			<br/>
-			<x-button action-type="button" type="default" @click.native="reg()" key="reg" plain>注册</x-button>
+			<x-button action-type="button" type="default" @click.native="reg()" key="regBtn" plain>注册</x-button>
 			<br/>
 		</form>
 		<div v-else>
@@ -16,8 +16,9 @@
 				<x-input required title="用户姓名" placeholder="Input fullname" v-model="fullname"></x-input>
 				<x-input required title="密    码" placeholder="Input password" type="password" v-model="password"></x-input>
 				<x-input required title="电    话" placeholder="Input phone" v-model="phone"></x-input>
-				<mt-radio required title="性    别" v-model="sex" :options="sexOptions" align="right">
-				</mt-radio>
+				<group title="性别">
+					<radio title="性    别" :options="sexOptions" v-model="sex"></radio>
+				</group>
 			</group>
 			<x-button type="primary" @click.native="addUser()" key="doReg">注册</x-button>
 			<br/>
@@ -28,14 +29,11 @@
 </template>
 
 <script>
-	import store from '@/store';
-	import { MessageBox } from 'mint-ui';
-	import { Toast } from 'mint-ui';
+	import { AlertModule } from 'vux'
 	import axios from "@/axios";
 
 	var login = {
 		name: 'login',
-		store,
 		data() {
 			return {
 				isReg: false,
@@ -44,15 +42,7 @@
 				password: '',
 				phone: '',
 				sex: '',
-				sexOptions: [{
-						label: '男性',
-						value: '男'
-					},
-					{
-						label: '女性',
-						value: '女'
-					}
-				]
+				sexOptions: ['男', '女']
 			};
 		},
 		methods: {
@@ -74,11 +64,9 @@
 					this.$vux.toast.text('登录成功');
 
 					// 将用户存入localStorage
-					var roles = response.data.roles;
-					localStorage.setItem("username", response.data.username);
-					localStorage.setItem("fullname", response.data.fullname);
-					localStorage.setItem("roles", roles);
+					localStorage.setItem("userId", response.data.id);
 
+					var roles = response.data.roles;
 					// 跳转路由
 					if(roles && roles.indexOf("系统管理员") > -1) {
 						this.$router.replace("/admin");
@@ -94,7 +82,10 @@
 			},
 			async addUser() {
 				if(this.username == '' || this.password == '' || this.fullname == '' || this.phone == '' || this.sex == '') {
-					MessageBox.alert("请检查必填字段!!!");
+					AlertModule.show({
+						title: "提示信息",
+						content: "请检查必填字段"
+					});
 					return;
 				}
 
@@ -110,7 +101,7 @@
 				if(response.success) {
 					this.isReg = false;
 
-					Toast("注册成功");
+					this.$vux.toast.text("注册成功");
 				}
 			},
 			cancel() {

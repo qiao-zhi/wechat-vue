@@ -37,7 +37,7 @@ const routes = [{
 				path: 'user',
 				name: 'user',
 				component: () =>
-					import( /* webpackChunkName: "about" */ '../views/admin/User.vue')
+					import( /* webpackChunkName: "about" */ '../views/User.vue')
 			}
 		]
 	},
@@ -51,7 +51,17 @@ const routes = [{
 			path: 'user',
 			name: 'user',
 			component: () =>
-				import( /* webpackChunkName: "about" */ '../views/plain/User.vue')
+				import( /* webpackChunkName: "about" */ '../views/User.vue')
+		}, {
+			path: 'pays',
+			name: 'pays',
+			component: () =>
+				import( /* webpackChunkName: "about" */ '../views/plain/Pays.vue')
+		}, {
+			path: 'pay',
+			name: 'pay',
+			component: () =>
+				import( /* webpackChunkName: "about" */ '../views/plain/Pay.vue')
 		}]
 	}
 ];

@@ -5,7 +5,7 @@
 				<group title="缴费列表">
 					<div v-for="(item, index) in list" :key="index" id="showDetailModelDiv" @click="changeShowDetailModel(item.id)">
 						<cell is-link>
-							<span slot="title">{{index + 1 }}</span> {{item.name}}
+							<span slot="title">{{item.kindergartenName }}</span> {{item.childrenName}}
 						</cell>
 					</div>
 				</group>
