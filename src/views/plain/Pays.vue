@@ -3,7 +3,7 @@
 		<scroller ref="scrollerBottom" @on-scroll="onScroll" @on-scroll-bottom="onScrollBottom" height="-75px;" use-pullup :pullup-config="pullupDefaultConfig">
 			<div style="padding: 10px 0">
 				<group title="缴费列表">
-					<div v-for="(item, index) in list" :key="index" id="showDetailModelDiv" @click="changeShowDetailModel(item.id)">
+					<div v-for="(item, index) in list" :key="index" id="showDetailModelDiv" @click="detailPay(item.id)">
 						<cell is-link>
 							<span slot="title">{{item.kindergartenName }}</span> {{item.childrenName}}
 						</cell>
@@ -16,6 +16,7 @@
 <script>
 	import axios from 'axios'
 	import { TransferDomDirective as TransferDom } from 'vux'
+	import store from '@/store';
 
 	const pullupDefaultConfig = {
 		content: '上拉加载更多',
@@ -29,6 +30,7 @@
 	}
 
 	export default {
+		store,
 		mounted() {
 			this.loadMore()
 		},
@@ -54,8 +56,10 @@
 			onScroll() {
 				this.scrollTop = pos.top
 			},
-			async changeShowDetailModel(id) {
-				console.log(id);
+			async detailPay(id) {
+				store.dispatch("setPayIdFun", id);
+
+				this.$router.push('/plain/payDetail');
 			},
 			onScrollBottom() {
 				if(this.last) {

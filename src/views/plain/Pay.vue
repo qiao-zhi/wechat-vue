@@ -55,13 +55,10 @@
 					this.server = response.data.server;
 					this.payAmount = response.data.amount;
 					this.kindergartenId = response.data.id;
-					this.kindergartenName = response.data.name;
 				} else {
 					this.version = "";
 					this.server = "";
 					this.payAmount = "";
-					this.kindergartenId = "";
-					this.kindergartenName = "";
 				}
 			},
 			async doPay() {

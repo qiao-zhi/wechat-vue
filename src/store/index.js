@@ -4,19 +4,18 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-    username: ''
-  },
-  mutations: {
-    setLoginUsername(state, username) {
-      state.username = username
-    },
-  },
-  actions: {
-    setLoginUsernameFun(context, username) {
-      context.commit("setLoginUsername", username);
-    },
-  },
-  modules: {
-  },
+	state: {
+		payId: ''
+	},
+	mutations: {
+		setPayId(state, payId) {
+			state.payId = payId
+		},
+	},
+	actions: {
+		setPayIdFun(context, payId) {
+			context.commit("setPayId", payId);
+		},
+	},
+	modules: {},
 });
