@@ -9,6 +9,7 @@
 			<br/>
 			<x-button action-type="button" type="default" @click.native="reg()" key="regBtn" plain>注册</x-button>
 			<br/>
+			<x-button action-type="button" type="primary" @click.native="wxLogin()" key="wxLogin">微信登录</x-button>
 		</form>
 		<div v-else>
 			<group title="注册" label-align="left" label-width="80px" key="reg">
@@ -106,6 +107,9 @@
 			},
 			cancel() {
 				this.isReg = false;
+			},
+			wxLogin() {
+				window.location.href = "/api/weixin/auth/login.html"
 			}
 		}
 	}

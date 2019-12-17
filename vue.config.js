@@ -2,6 +2,8 @@ module.exports = {
 	publicPath: './',
 	lintOnSave: false,
 	devServer: {
+		hotOnly: false,
+		disableHostCheck: true,
 		proxy: {
 			'/api': {
 				target: 'http://localhost:8088',

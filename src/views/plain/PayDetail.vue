@@ -30,7 +30,16 @@
 				name: '',
 				server: '',
 				version: '',
-				amount: ''
+				amount: '',
+
+				semester: '',
+				grade: '',
+				classNum: '',
+				childrenName: '',
+				parentName: '',
+				parentPhone: '',
+				payDate: '',
+				payAmount: ''
 			};
 		},
 		mounted() {
@@ -46,6 +55,15 @@
 				this.server = data.server;
 				this.version = data.version;
 				this.amount = data.amount;
+
+				this.semester = data.semester;
+				this.grade = data.grade;
+				this.classNum = data.class_num;
+				this.childrenName = data.children_name;
+				this.parentName = data.parent_name;
+				this.parentPhone = data.parent_phone;
+				this.payDate = data.pay_date;
+				this.payAmount = data.pay_amount;
 			}
 		}
 	}
