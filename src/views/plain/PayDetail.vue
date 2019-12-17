@@ -1,5 +1,5 @@
 <template>
-	<div class="payDetail">
+	<div class="payDetail" style="height:100%;">
 		<group title="幼儿园">
 			<cell title="名称">{{name}}</cell>
 			<cell title="服务商">{{server}}</cell>

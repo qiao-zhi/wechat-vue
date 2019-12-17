@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<scroller ref="scrollerBottom" @on-scroll-bottom="onScrollBottom" height="-75px;" use-pullup :pullup-config="pullupDefaultConfig">
+		<scroller bounce="false" ref="scrollerBottom" @on-scroll-bottom="onScrollBottom" height="-117px;" use-pullup :pullup-config="pullupDefaultConfig">
 			<div style="padding: 10px 0">
 				<group title="幼儿园列表">
 					<div v-for="(item, index) in list" :key="index" id="showDetailModelDiv" @click="changeShowDetailModel(item.id)">
@@ -14,7 +14,7 @@
 
 		<div>
 			<popup v-model="showDetailModel" is-transparent>
-				<div style="width: 95%;background-color:#fff;margin:0 auto;border-radius:5px;padding-top:5px;">
+				<div style="background-color:#fff;margin:0 auto;border-radius:5px;padding-top:5px;">
 					<group>
 						<cell title="名称">{{detailName}}</cell>
 						<cell title="版本">{{detailServer}}</cell>
