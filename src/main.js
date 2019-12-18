@@ -42,6 +42,10 @@ Vue.use(ToastPlugin, {
 	position: 'middle'
 })
 
+// 自己的图标样式可
+import '@/assets/css/icon/icono.min.css'
+import '@/assets/css/wechat-vue-all.css'
+
 Vue.config.productionTip = false;
 
 new Vue({

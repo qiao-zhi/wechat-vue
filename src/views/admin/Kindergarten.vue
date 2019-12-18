@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<scroller bounce="false" ref="scrollerBottom" @on-scroll-bottom="onScrollBottom" height="-117px;" use-pullup :pullup-config="pullupDefaultConfig">
+		<scroller :bounce=false ref="scrollerBottom" @on-scroll-bottom="onScrollBottom" height="-117px;" use-pullup :pullup-config="pullupDefaultConfig">
 			<div style="padding: 10px 0">
 				<group title="幼儿园列表">
 					<div v-for="(item, index) in list" :key="index" id="showDetailModelDiv" @click="changeShowDetailModel(item.id)">

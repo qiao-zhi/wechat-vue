@@ -1,0 +1,16 @@
+/*修饰图标库*/
+
+[class*='icono'] {
+	color: #dcdcdc;
+}
+
+.weui-bar__item_on [class*='icono'] {
+	color: green;
+}
+
+
+/*去掉a标签选中的下划线*/
+
+a.weui-bar__item_on {
+	text-decoration: none;
+}

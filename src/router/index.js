@@ -14,7 +14,7 @@ const routes = [{
 		name: 'admin',
 		component: () =>
 			import( /* webpackChunkName: "about" */ '../views/AdminHome.vue'),
-		redirect: '/admin/user',
+		redirect: '/admin/kindergarten',
 		children: [{
 				path: 'kindergarten',
 				name: 'kindergarten',
@@ -46,7 +46,7 @@ const routes = [{
 		name: 'plain',
 		component: () =>
 			import( /* webpackChunkName: "about" */ '../views/PlainHome.vue'),
-		redirect: '/plain/user',
+		redirect: '/plain/pays',
 		children: [{
 			path: 'user',
 			name: 'user',

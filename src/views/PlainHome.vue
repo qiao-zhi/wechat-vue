@@ -6,26 +6,43 @@
 			<router-view class="router-view"></router-view>
 
 			<tabbar slot="bottom">
-				<tabbar-item link="/plain/pays">
-					<img slot="icon" src="../assets/icon_nav_msg.png">
+				<tabbar-item link="/plain/pays" selected>
+					<span slot="icon"><i class="icono-list"></i></span>
 					<span slot="label">缴费明细</span>
 				</tabbar-item>
-				<tabbar-item selected link="/plain/pay">
-					<img slot="icon" src="@/assets/icon_nav_cell.png">
+				<tabbar-item link="/plain/pay">
+					<span slot="icon"><i class="icono-filter"></i></span>
 					<span slot="label">缴费</span>
 				</tabbar-item>
-				<tabbar-item selected link="/plain/user">
-					<img slot="icon" src="@/assets/icon_nav_cell.png">
+				<tabbar-item link="/plain/user">
+					<span slot="icon"><i class="icono-user"></i></span>
 					<span slot="label">我</span>
 				</tabbar-item>
 			</tabbar>
 		</view-box>
+
+		<div class="moreSheet">
+			<actionsheet v-model="showMenus" @on-click-menu="clickFXPYQ" :menus="FXPYQMenus" :close-on-clicking-mask="false" show-cancel @on-click-mask="console('on click mask')"></actionsheet>
+		</div>
 	</div>
 </template>
 
 <script>
 	export default {
 		name: 'plainHome',
+		data() {
+			return {
+				showMenus: false,
+				FXPYQMenus: {
+					menu1: "分享到朋友圈"
+				}
+			}
+		},
+		methods: {
+			clickFXPYQ(menuKey, menuItem) {
+				console.log(menuKey, menuItem)
+			}
+		}
 	};
 </script>
 
