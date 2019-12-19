@@ -1,11 +1,13 @@
 <template>
 	<div>
+		<search placeholder="关键字" position="absolute" @on-change="loadMore" auto-scroll-to-top top="46px" v-model="keywords"></search>
+
 		<scroller :bounce=false ref="scrollerBottom" @on-scroll="onScroll" @on-scroll-bottom="onScrollBottom" height="-117px;" use-pullup :pullup-config="pullupDefaultConfig">
 			<div style="padding: 10px 0">
 				<group title="缴费列表">
 					<div v-for="(item, index) in list" :key="index" id="showDetailModelDiv" @click="detailPay(item.id)">
-						<cell is-link>
-							<span slot="title">{{item.kindergartenName }}</span> {{item.childrenName}}
+						<cell is-link :key="index + 'cell'" :title="item.kindergartenName">
+							{{item.childrenName}}
 						</cell>
 					</div>
 				</group>
@@ -41,6 +43,7 @@
 				// 页号一直是1，增加页大小
 				pageNum: 1,
 				pageSize: 0,
+				keywords: '',
 
 				//标记是否在取数据
 				onFetching: false,
@@ -72,19 +75,23 @@
 				}
 			},
 			async loadMore() {
-				var url = "/pay/pageJSON.html";
+				var url = "/pay/pageJSON2.html";
 
 				this.pageSize += 6;
 				var response = await axios.post(url, {
 					pageNum: this.pageNum,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					keywords: this.keywords
 				});
 
 				var responseData = response.data;
 
+				// 调用这个重置数据，不然会出问题
+				this.$refs.scrollerBottom.reset()
+
 				this.onFetching = false;
-				this.last = responseData.last;
-				this.list = responseData.content;
+				this.last = responseData.isLastPage;
+				this.list = responseData.list;
 
 				if(this.last) {
 					this.$refs.scrollerBottom.disablePullup();

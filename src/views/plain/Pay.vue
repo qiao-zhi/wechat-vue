@@ -2,7 +2,7 @@
 	<div class="pay">
 		<div>
 			<group title="缴费单" label-align="left" label-width="80px" key="reg">
-				<selector title="幼儿园" placeholder="请选择幼儿园" v-model="kindergartenName" :options="list" @on-change="onChange"></selector>
+				<selector title="幼儿园" placeholder="请选择幼儿园" v-model="kindergartenId" :options="list" @on-change="onChange"></selector>
 				<x-input required title="版本" readonly placeholder="选择幼儿园自动输入" v-model="version"></x-input>
 				<x-input required title="服务商" readonly placeholder="选择幼儿园自动输入" v-model="server"></x-input>
 				<x-input required title="学期" v-model="semester"></x-input>
@@ -54,7 +54,7 @@
 					this.version = response.data.version;
 					this.server = response.data.server;
 					this.payAmount = response.data.amount;
-					this.kindergartenId = response.data.id;
+					this.kindergartenName = response.data.name;
 				} else {
 					this.version = "";
 					this.server = "";
@@ -88,6 +88,7 @@
 				if(response.success) {
 					this.$vux.toast.text("缴费成功");
 
+					this.kindergartenId = "";
 					this.kindergartenName = "";
 				}
 			}
