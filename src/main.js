@@ -18,7 +18,9 @@ import { Popup } from 'vux'
 import { TransferDom } from 'vux'
 import { ViewBox } from 'vux'
 import { Selector } from 'vux'
+import { Search } from 'vux'
 
+Vue.component('search', Search)
 Vue.component('selector', Selector)
 Vue.component('view-box', ViewBox)
 Vue.component('TransferDom', TransferDom)
@@ -48,8 +50,19 @@ import '@/assets/css/wechat-vue-all.css'
 
 Vue.config.productionTip = false;
 
+// 引入常量模块
+import axios from "@/axios";
+import Constants from '@/Constants.vue';
+
 new Vue({
 	router,
 	store,
 	render: h => h(App),
+	mounted() {
+		axios.post('/weixin/auth/getJsapiSigner.html', {
+			url: "http://localhost:8080/"
+		}).then(function(resData) {
+			console.log(resData);
+		});
+	}
 }).$mount('#app');

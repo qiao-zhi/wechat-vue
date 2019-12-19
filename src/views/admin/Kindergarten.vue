@@ -1,11 +1,14 @@
 <template>
 	<div>
+		<search placeholder="幼儿园名称关键字" @on-change="loadMore" auto-scroll-to-top top="46px" v-model="keywords"></search>
+
 		<scroller :bounce=false ref="scrollerBottom" @on-scroll-bottom="onScrollBottom" height="-117px;" use-pullup :pullup-config="pullupDefaultConfig">
+
 			<div style="padding: 10px 0">
 				<group title="幼儿园列表">
 					<div v-for="(item, index) in list" :key="index" id="showDetailModelDiv" @click="changeShowDetailModel(item.id)">
-						<cell is-link>
-							<span slot="title">{{index + 1 }}</span> {{item.name}}
+						<cell is-link :key="index + 'cell'">
+							<span slot="title" :key="index + 'span'">{{index + 1 }}</span> {{item.name}}
 						</cell>
 					</div>
 				</group>
@@ -13,7 +16,7 @@
 		</scroller>
 
 		<div>
-			<popup v-model="showDetailModel" is-transparent>
+			<popup v-model="showDetailModel" :value=true is-transparent>
 				<div style="background-color:#fff;margin:0 auto;border-radius:5px;padding-top:5px;">
 					<group>
 						<cell title="名称">{{detailName}}</cell>
@@ -53,6 +56,7 @@
 				// 页号一直是1，增加页大小
 				pageNum: 1,
 				pageSize: 0,
+				keywords: '',
 
 				//标记是否在取数据
 				onFetching: false,
@@ -79,6 +83,8 @@
 				this.detailAddress = response.data.address;
 				this.detailAmount = response.data.amount;
 
+				console.log("detailAddress    " + this.detailAddress)
+
 				this.showDetailModel = !this.showDetailModel;
 			},
 			onScrollBottom() {
@@ -97,8 +103,12 @@
 				this.pageSize += 6;
 				var response = await axios.post(url, {
 					pageNum: this.pageNum,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					keywords: this.keywords,
 				});
+
+				// 调用这个重置数据，不然会出问题
+				this.$refs.scrollerBottom.reset()
 
 				var responseData = response.data;
 
