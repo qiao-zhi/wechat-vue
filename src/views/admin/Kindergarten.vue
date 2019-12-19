@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<search placeholder="幼儿园名称关键字" @on-change="loadMore" auto-scroll-to-top top="46px" v-model="keywords"></search>
+		<search placeholder="关键字" @on-change="loadMore" auto-scroll-to-top top="46px" v-model="keywords"></search>
 
 		<scroller :bounce=false ref="scrollerBottom" @on-scroll-bottom="onScrollBottom" height="-117px;" use-pullup :pullup-config="pullupDefaultConfig">
 
