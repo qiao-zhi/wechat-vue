@@ -110,8 +110,25 @@
 			cancel() {
 				this.isReg = false;
 			},
-			wxLogin() {
-				window.location.href = Constants.weixinAuthAddress;
+			async wxLogin() {
+				// 异步登录
+				var response = await axios.post(Constants.weixinAuthAddress);
+
+				if(response.success) {
+					// 显示文字
+					this.$vux.toast.text('登录成功');
+
+					// 将用户存入localStorage
+					localStorage.setItem("userId", response.data.id);
+
+					var roles = response.data.roles;
+					// 跳转路由
+					if(roles && roles.indexOf("系统管理员") > -1) {
+						this.$router.replace("/admin");
+					} else {
+						this.$router.replace("/plain");
+					}
+				}
 			}
 		}
 	}
