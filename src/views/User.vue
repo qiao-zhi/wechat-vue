@@ -30,7 +30,7 @@
 		},
 		mounted: async function() {
 			var userId = localStorage.getItem("userId");
-			var response = await axios.post('/user/detail/' + userId + ".html");
+			var response = await axios.post("/user/detailLoginUser.html");
 
 			this.fullname = response.data.fullname;
 			this.roles = response.data.roles;
