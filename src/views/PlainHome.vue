@@ -28,6 +28,9 @@
 </template>
 
 <script>
+	import Constants from '@/Constants.vue';
+	import axios from "@/axios";
+
 	export default {
 		name: 'plainHome',
 		data() {
@@ -40,7 +43,9 @@
 		},
 		methods: {
 			clickFXPYQ(menuKey, menuItem) {
-				console.log(menuKey, menuItem)
+				if("menu1" == menuKey) {
+					Constants.wxShare();
+				}
 			}
 		}
 	};

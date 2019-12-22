@@ -8,8 +8,7 @@
 	html,
 	body {
 		height: 100%;
-		width: 98%;
-		overflow-x: hidden;
-		overflow-y: hidden;
+		width: 100%;
+		overflow: hidden;
 	}
 </style>

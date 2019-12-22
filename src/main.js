@@ -38,6 +38,11 @@ Vue.component('group', Group)
 Vue.component('x-input', XInput)
 Vue.component('x-button', XButton)
 
+// 引入微信对接模块
+import { WechatPlugin } from 'vux'
+Vue.use(WechatPlugin)
+console.log(Vue.wechat) // 可以直接访问 wx 对象,wx对象是微信jssdk的入口
+
 // ToastPlugin提示插件
 import { ToastPlugin } from 'vux'
 Vue.use(ToastPlugin, {
