@@ -8,12 +8,14 @@
 			<cell title="地址">{{remark1}}</cell>
 			<cell title="角色">{{roles}}</cell>
 			<cell title="分享朋友圈次数">{{FXPYQTimes}}</cell>
+			<x-button type="primary" @click.native="doPay" key="doPay">缴费</x-button>
 		</group>
 	</div>
 </template>
 
 <script>
 	import axios from "@/axios";
+	import Constants from '@/Constants.vue';
 
 	export default {
 		name: 'user',
@@ -37,6 +39,13 @@
 			this.sex = response.data.sex;
 			this.remark1 = response.data.remark1;
 			this.photo = response.data.photo;
+		},
+		methods: {
+			async doPay() {
+				alert("pay");
+				Constants.wxSPay();
+			}
+
 		}
 	};
 </script>

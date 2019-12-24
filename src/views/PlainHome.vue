@@ -33,9 +33,6 @@
 
 	export default {
 		name: 'plainHome',
-		created: function() {
-			Constants.wxConfig();
-		},
 		data() {
 			return {
 				showMenus: false,

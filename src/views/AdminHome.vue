@@ -36,9 +36,6 @@
 
 	export default {
 		name: 'adminHome',
-		created: function() {
-			Constants.wxConfig();
-		},
 		data() {
 			return {
 				showMenus: false,
