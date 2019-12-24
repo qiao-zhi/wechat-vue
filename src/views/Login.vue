@@ -52,7 +52,10 @@
 			async login() {
 				this.isReg = false;
 				if(this.username == "" || this.password == "") {
-					MessageBox.alert("账号密码必须输入");
+					AlertModule.show({
+						title: "提示信息",
+						content: "用户名和密码不能为空"
+					});
 					return;
 				}
 
