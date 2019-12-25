@@ -16,30 +16,31 @@ const routes = [{
 			import( /* webpackChunkName: "about" */ '../views/AdminHome.vue'),
 		redirect: '/admin/kindergarten',
 		children: [{
-				path: 'kindergarten',
-				name: 'kindergarten',
-				component: () =>
-					import( /* webpackChunkName: "about" */ '../views/admin/Kindergarten.vue')
-			},
-			{
-				path: 'pays',
-				name: 'pays',
-				component: () =>
-					import( /* webpackChunkName: "about" */ '../views/admin/Pays.vue')
-			},
-			{
-				path: 'settings',
-				name: 'settings',
-				component: () =>
-					import( /* webpackChunkName: "about" */ '../views/admin/Settings.vue')
-			},
-			{
-				path: 'user',
-				name: 'user',
-				component: () =>
-					import( /* webpackChunkName: "about" */ '../views/User.vue')
-			}
-		]
+			path: 'kindergarten',
+			name: 'kindergarten',
+			component: () =>
+				import( /* webpackChunkName: "about" */ '../views/admin/Kindergarten.vue')
+		}, {
+			path: 'pays',
+			name: 'pays',
+			component: () =>
+				import( /* webpackChunkName: "about" */ '../views/admin/Pays.vue')
+		}, {
+			path: 'settings',
+			name: 'settings',
+			component: () =>
+				import( /* webpackChunkName: "about" */ '../views/admin/Settings.vue')
+		}, {
+			path: 'user',
+			name: 'user',
+			component: () =>
+				import( /* webpackChunkName: "about" */ '../views/User.vue')
+		}, {
+			path: 'payDetail',
+			name: 'payDetail',
+			component: () =>
+				import( /* webpackChunkName: "about" */ '../views/admin/PayDetail.vue')
+		}]
 	},
 	{
 		path: '/plain',

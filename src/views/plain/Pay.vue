@@ -1,16 +1,16 @@
 <template>
 	<div class="pay">
-		<group title="缴费单" label-align="left" label-width="80px" key="reg">
+		<group title="缴费单<br/>如缴费错误可致电 18008426392 专员处理相关事宜" label-align="left" label-width="80px" key="reg">
 			<selector title="幼儿园" placeholder="请选择幼儿园" v-model="kindergartenId" :options="list" @on-change="onChange"></selector>
 			<x-input required title="版本" readonly placeholder="选择幼儿园自动输入" v-model="version"></x-input>
 			<x-input required title="服务商" readonly placeholder="选择幼儿园自动输入" v-model="server"></x-input>
-			<x-input required title="学期" v-model="semester"></x-input>
+			<x-input required title="缴费金额" readonly placeholder="选择幼儿园自动输入" v-model="payAmount"></x-input>
+			<selector title="学期" placeholder="请选择学期" v-model="semester" :options="semesterList" @on-change="onChange"></selector>
 			<x-input required title="年级" v-model="grade"></x-input>
 			<x-input required title="班级" v-model="classNum"></x-input>
 			<x-input required title="父母姓名" v-model="parentName"></x-input>
 			<x-input required title="父母电话" v-model="parentPhone"></x-input>
 			<x-input required title="学生姓名" v-model="childrenName"></x-input>
-			<x-input required title="缴费金额" readonly placeholder="选择幼儿园自动输入" v-model="payAmount"></x-input>
 		</group>
 		<x-button type="primary" @click.native="doPay" key="doPay">缴费</x-button>
 		<br/>
@@ -25,6 +25,7 @@
 		name: 'pay',
 		data() {
 			return {
+				semesterList: ['上学期', '下学期'],
 				list: [],
 
 				kindergartenId: '',

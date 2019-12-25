@@ -1,7 +1,7 @@
 <template>
 	<div class="home" style="height:100%; ">
 		<view-box ref="viewBox" body-padding-top="45px" body-padding-bottom="60px">
-			<x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;" :right-options="{showMore: true}" @on-click-more="showMenus = true">缴费系统后台管理</x-header>
+			<x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;" :right-options="{showMore: true}" @on-click-more="showMenus = true">中国电信平安校园考勤卡自助缴费系统</x-header>
 
 			<router-view/>
 

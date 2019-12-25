@@ -62,7 +62,7 @@
 			async detailPay(id) {
 				store.dispatch("setPayIdFun", id);
 
-				this.$router.push('/plain/payDetail');
+				this.$router.push('/admin/payDetail');
 			},
 			onScrollBottom() {
 				if(this.last) {
