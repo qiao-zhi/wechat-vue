@@ -1,5 +1,5 @@
 <template>
-	<div class="payDetail" style="height:100%;">
+	<div class="payDetail">
 		<group title="幼儿园">
 			<cell title="名称">{{name}}</cell>
 			<cell title="服务商">{{server}}</cell>
@@ -16,6 +16,7 @@
 			<cell title="父母电话">{{parentPhone}}</cell>
 			<cell title="缴费日期">{{payDate}}</cell>
 			<cell title="缴费金额">{{payAmount}}</cell>
+			<cell v-if="remark1 !== ''" title="备注">{{remark1}}</cell>
 		</group>
 	</div>
 </template>
@@ -39,7 +40,10 @@
 				parentName: '',
 				parentPhone: '',
 				payDate: '',
-				payAmount: ''
+				payAmount: '',
+
+				// 备注
+				remark1: ''
 			};
 		},
 		mounted() {
@@ -64,6 +68,10 @@
 				this.parentPhone = data.parent_phone;
 				this.payDate = data.pay_date;
 				this.payAmount = data.pay_amount;
+
+				if(data.remark1) {
+					this.remark1 = data.remark1;
+				}
 			}
 		}
 	}

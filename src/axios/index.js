@@ -29,6 +29,7 @@ axios.interceptors.response.use(function(response) {
 			content: response.data.msg
 		});
 
+		// 返回一个新的Promise对象就相当于接触链式调用
 		return new Promise(function(resolve, reject) {
 			//                    resolve('success1');
 			//                  reject('error');

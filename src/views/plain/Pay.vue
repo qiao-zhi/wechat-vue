@@ -1,6 +1,6 @@
 <template>
 	<div class="pay">
-		<group title="缴费单<br/>如缴费错误可致电 18008426392 专员处理相关事宜" label-align="left" label-width="80px" key="reg">
+		<group title="如缴费错误可致电<a href='tel:18008426392'>18008426392</a>专员处理相关事宜" label-align="left" label-width="80px" key="reg">
 			<selector title="幼儿园" placeholder="请选择幼儿园" v-model="kindergartenId" :options="list" @on-change="onChange"></selector>
 			<x-input required title="版本" readonly placeholder="选择幼儿园自动输入" v-model="version"></x-input>
 			<x-input required title="服务商" readonly placeholder="选择幼儿园自动输入" v-model="server"></x-input>
@@ -44,6 +44,12 @@
 		mounted: async function() {
 			var response = await axios.post("/kindergarten/listNamesAndIds.html");
 			this.list = response.data;
+
+			var userRes = await axios.post("/user/detailLoginUser.html");
+			var userinfo = userRes.data;
+			this.parentName = userinfo.fullname;
+			this.parentPhone = userinfo.phone;
+			this.childrenName = userinfo.childrenname;
 		},
 		methods: {
 			async onChange(value) {

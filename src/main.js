@@ -19,7 +19,9 @@ import { TransferDom } from 'vux'
 import { ViewBox } from 'vux'
 import { Selector } from 'vux'
 import { Search } from 'vux'
+import  { ConfirmPlugin } from 'vux'
 
+Vue.use(ConfirmPlugin)
 Vue.component('search', Search)
 Vue.component('selector', Selector)
 Vue.component('view-box', ViewBox)

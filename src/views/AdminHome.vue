@@ -1,7 +1,7 @@
 <template>
 	<div class="home" style="height:100%; ">
 		<view-box ref="viewBox" body-padding-top="45px" body-padding-bottom="60px">
-			<x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;" :right-options="{showMore: true}" @on-click-more="showMenus = true">中国电信平安校园考勤卡自助缴费系统</x-header>
+			<x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;" :right-options="{showMore: true}" @on-click-more="showMenus = true">考勤卡缴费系统</x-header>
 
 			<router-view/>
 
@@ -26,29 +26,43 @@
 		</view-box>
 
 		<div class="moreSheet">
-			<actionsheet v-model="showMenus" @on-click-menu="clickFXPYQ" :menus="FXPYQMenus" :close-on-clicking-mask="false" show-cancel @on-click-mask="console('on click mask')"></actionsheet>
+			<actionsheet v-model="showMenus" @on-click-menu="clickMore" :menus="moreMenus" :close-on-clicking-mask="true"></actionsheet>
 		</div>
 	</div>
 </template>
 
 <script>
 	import Constants from '@/Constants.vue';
+	import axios from "@/axios";
 
 	export default {
 		name: 'adminHome',
 		data() {
 			return {
 				showMenus: false,
-				FXPYQMenus: {
-					menu1: "分享到朋友圈"
+
+				moreMenus: {
+					menu1: "退出登录"
 				}
 			}
 		},
 		methods: {
-			clickFXPYQ(menuKey, menuItem) {
+			clickMore(menuKey, menuItem) {
 				if("menu1" == menuKey) {
-					Constants.wxShare();
+					this.logout();
 				}
+			},
+			logout() {
+				// 将_this指向当前vm对象
+				const _this = this;
+				this.$vux.confirm.show({
+					title: '',
+					content: '您确定要登出吗？',
+					onConfirm() {
+						axios.post("/logoutJson.html");
+						_this.$router.replace("/");
+					}
+				})
 			}
 		}
 	};

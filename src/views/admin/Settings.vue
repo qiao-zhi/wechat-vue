@@ -1,13 +1,13 @@
 <template>
 	<div class="user">
 		<group title="第一次登陆优惠券金额">
-			<div id="FXPYQDiv" @click="changeShowUpdateAmount">
-				<cell title="金额" is-link>{{amount}}</cell>
+			<div id="couponDiv" @click="changeShowUpdateAmount" key="couponKeyDiv">
+				<cell title="金额" is-link key="couponKey">{{coupon}}</cell>
 			</div>
 		</group>
 
-		<div v-transfer-dom>
-			<confirm v-model="showUpdateAmount" ref="amount" show-input title="输入金额" :input-attrs="{type: 'number'}" @on-confirm="onConfirm" @on-show="onShow">
+		<div>
+			<confirm v-model="showUpdateAmount" ref="couponRef" show-input title="输入金额" :input-attrs="{type: 'number'}" @on-confirm="onConfirm" @on-show="onShow">
 			</confirm>
 		</div>
 	</div>
@@ -15,16 +15,15 @@
 
 <script>
 	import axios from "@/axios";
-	import { TransferDomDirective as TransferDom } from 'vux'
 
 	export default {
 		name: 'settings',
 		directives: {
-			TransferDom
+			//TransferDom
 		},
 		data() {
 			return {
-				amount: '',
+				coupon: '',
 
 				showUpdateAmount: false
 			}
@@ -34,21 +33,20 @@
 				this.showUpdateAmount = !this.showUpdateAmount;
 			},
 			onShow() {
-				this.$refs.amount.setInputValue(this.amount);
+				this.$refs.couponRef.setInputValue(this.coupon);
 			},
 			async onConfirm(value) {
-				var response = await axios.post('/settings/setProperty.html?key=amount&value=' + value);
+				var response = await axios.post('/settings/setProperty.html?key=coupon&value=' + value);
 				this.$vux.toast.text('修改成功');
 
-				this.$refs.amount.setInputValue('');
-				this.amount = value;
+				this.coupon = value;
 			}
 		},
 		mounted: async function() {
 			var userId = localStorage.getItem("userId");
-			var response = await axios.post("/settings/getProperty.html?key=amount");
+			var response = await axios.post("/settings/getProperty.html?key=coupon");
 
-			this.amount = response.data;
+			this.coupon = response.data;
 		}
 	};
 </script>
