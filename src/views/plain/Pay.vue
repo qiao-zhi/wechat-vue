@@ -19,9 +19,11 @@
 
 <script>
 	import axios from "@/axios";
-	import { AlertModule } from 'vux'
+	import { AlertModule } from 'vux';
+	import store from '@/store';
 
 	export default {
+		store,
 		name: 'pay',
 		data() {
 			return {
@@ -75,7 +77,6 @@
 					return;
 				}
 
-				// 异步注册
 				var response = await axios.post('/pay/doAddJSON.html', {
 					kindergartenId: this.kindergartenId,
 					kindergartenName: this.kindergartenName,
@@ -91,12 +92,20 @@
 				});
 
 				if(response.success) {
-					this.$vux.toast.text("缴费成功");
+					this.$vux.toast.text("缴费成功,您可以点击右上角分享至朋友圈");
 
 					this.kindergartenId = "";
 					this.kindergartenName = "";
+
+					this.detailPay(response.data.id);
 				}
-			}
+			},
+			async detailPay(id) {
+				store.dispatch("setPayIdFun", id);
+
+				this.$router.push('/plain/payDetail');
+			},
 		}
+
 	};
 </script>

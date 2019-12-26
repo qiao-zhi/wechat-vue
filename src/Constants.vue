@@ -8,6 +8,22 @@
 		projectBaseAddress: '/api',
 		// 微信授权后台地址，这里手动加api是用window.location.href跳转
 		weixinAuthAddress: '/api/weixin/auth/login.html',
+
+		/**
+		 * 获取协议 + IP + 端口
+		 */
+		getBasePath() {
+			// 获取当前网址，如：http://localhost:8080/MyWeb/index.html
+			//			var curWwwPath = window.document.location.href;
+			// 获取主机地址之后的目录，如： MyWeb/index.html
+			//			var pathName = window.document.location.pathname;
+
+			// window.location.protocol（网站协议：https、http）
+			// window.location.host    （端口号+域名；注意：80端口，只显示域名）
+			// 返回：https://www.domain.com:8080
+			var path = window.location.protocol + '//' + window.location.host
+			return path;
+		},
 		async wxConfig() {
 			function getUrl() {
 				var url = window.location.href;
@@ -28,11 +44,9 @@
 			// 向后端返回的签名信息添加前端处理的东西
 			wxdata.debug = true;
 			// 所有要调用的 API 都要加到这个列表中
-			'onMenuShareTimeline' //分享到朋友圈
 			wxdata.jsApiList = ['onMenuShareTimeline', 'chooseWXPay'];
 
 			Vue.wechat.config(wxdata);
-			alert("config success");
 		},
 		async wxShare(obj) {
 			// 先config
@@ -53,15 +67,13 @@
 				}
 			}
 
-			alert(1);
 			Vue.wechat.ready(function() {
-				alert(2);
 				Vue.wechat.onMenuShareTimeline({
 					title: titleValue, // 分享标题
 					link: linkValue, // 分享链接
 					imgUrl: imgUrlValue, // 分享图标
 					success: function() {
-						// 用户确认分享后执行的回调函数
+						// 用户确认分享后执行的回调函数(这里需要记录后台)
 						alert('用户已分享');
 					},
 					cancel: function(res) {
@@ -71,7 +83,6 @@
 						alert(JSON.stringify(res));
 					}
 				});
-				alert(3);
 			})
 		},
 		async wxSPay() {
