@@ -13,8 +13,8 @@
 				<cell title="年级">{{grade}}</cell>
 				<cell title="班级">{{classNum}}</cell>
 				<cell title="学生姓名">{{childrenName}}</cell>
-				<cell title="父母姓名">{{parentName}}</cell>
-				<cell title="父母电话">{{parentPhone}}</cell>
+				<cell title="家长姓名">{{parentName}}</cell>
+				<cell title="家长电话">{{parentPhone}}</cell>
 				<cell title="缴费日期">{{payDate}}</cell>
 				<cell title="缴费金额">{{payAmount}}</cell>
 				<cell v-if="remark1 !== ''" title="备注">{{remark1}}</cell>

@@ -8,8 +8,8 @@
 			<selector title="学期" placeholder="请选择学期" v-model="semester" :options="semesterList" @on-change="onChange"></selector>
 			<x-input required title="年级" v-model="grade"></x-input>
 			<x-input required title="班级" v-model="classNum"></x-input>
-			<x-input required title="父母姓名" v-model="parentName"></x-input>
-			<x-input required title="父母电话" v-model="parentPhone"></x-input>
+			<x-input required title="家长姓名" v-model="parentName"></x-input>
+			<x-input required title="家长电话" v-model="parentPhone"></x-input>
 			<x-input required title="学生姓名" v-model="childrenName"></x-input>
 		</group>
 		<x-button type="primary" @click.native="doPay" key="doPay">缴费</x-button>

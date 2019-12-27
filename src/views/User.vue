@@ -13,7 +13,7 @@
 				<cell title="电话" is-link>{{phone}}</cell>
 			</div>
 			<div id="childrennameDiv" @click="changeShowChildrenname">
-				<cell title="孩子姓名" is-link>{{childrenname}}</cell>
+				<cell title="学生姓名" is-link>{{childrenname}}</cell>
 			</div>
 			<cell title="优惠金额">{{coupon}}</cell>
 		</group>
