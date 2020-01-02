@@ -1,7 +1,7 @@
 <template>
 	<div class="pay">
 		<group title="如缴费错误可致电<a href='tel:18008426392'>18008426392</a>专员处理相关事宜" label-align="left" label-width="80px" key="reg">
-			<selector title="幼儿园" placeholder="请选择幼儿园" v-model="kindergartenId" :options="list" @on-change="onChange"></selector>
+			<x-input required title="幼儿园" readonly placeholder="请到个人中心设置所属幼儿园" v-model="kindergartenName"></x-input>
 			<x-input required title="版本" readonly placeholder="选择幼儿园自动输入" v-model="version"></x-input>
 			<x-input required title="服务商" readonly placeholder="选择幼儿园自动输入" v-model="server"></x-input>
 			<x-input required title="缴费金额" readonly placeholder="选择幼儿园自动输入" v-model="payAmount"></x-input>
@@ -28,7 +28,6 @@
 		data() {
 			return {
 				semesterList: ['上学期', '下学期'],
-				list: [],
 
 				kindergartenId: '',
 				kindergartenName: '',
@@ -44,30 +43,25 @@
 			};
 		},
 		mounted: async function() {
-			var response = await axios.post("/kindergarten/listNamesAndIds.html");
-			this.list = response.data;
-
 			var userRes = await axios.post("/user/detailLoginUser.html");
 			var userinfo = userRes.data;
 			this.parentName = userinfo.fullname;
 			this.parentPhone = userinfo.phone;
 			this.childrenName = userinfo.childrenname;
+
+			if(userinfo.remark1) {
+				var response = await axios.post('/kindergarten/detailByName.html', {
+					name: userinfo.remark1
+				});
+
+				this.version = response.data.version;
+				this.server = response.data.server;
+				this.payAmount = response.data.amount;
+				this.kindergartenName = response.data.name;
+				this.kindergartenId = response.data.id;
+			}
 		},
 		methods: {
-			async onChange(value) {
-				if(value) {
-					var response = await axios.post('/kindergarten/detail/' + value);
-
-					this.version = response.data.version;
-					this.server = response.data.server;
-					this.payAmount = response.data.amount;
-					this.kindergartenName = response.data.name;
-				} else {
-					this.version = "";
-					this.server = "";
-					this.payAmount = "";
-				}
-			},
 			async doPay() {
 				if(this.kindergartenId == '' || this.kindergartenName == '' || this.version == '' || this.server == '' || this.semester == '' || this.grade == '' || this.classNum == '' || this.parentName == '' || this.parentPhone == '' || this.childrenName == '' || this.payAmount == '') {
 					AlertModule.show({
