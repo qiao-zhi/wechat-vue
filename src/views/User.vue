@@ -124,13 +124,24 @@
 
 			// 改变幼儿园名称
 			async onChangeKindergarten(value) {
-				await axios.post('/user/updateLoginUser.html', {
-					remark1: value
-				});
+				// 将_this指向当前vm对象
+				const _this = this;
+				var confirmContent = '您确定要选择 ' + value + ' 吗？您只有一次修改的机会!';
+				this.$vux.confirm.show({
+					title: '',
+					content: confirmContent,
+					onConfirm() {
+						axios.post('/user/updateLoginUser.html', {
+							remark1: value
+						});
 
-				this.remark1 = value;
-
-				this.$vux.toast.text('修改成功');
+						_this.remark1 = value;
+						_this.$vux.toast.text('修改成功');
+					},
+					onCancel() {
+						_this.remark1 = '';
+					}
+				})
 			},
 
 			// 修改用户姓名
