@@ -47,6 +47,8 @@
 			wxdata.jsApiList = ['onMenuShareTimeline', 'chooseWXPay'];
 
 			Vue.wechat.config(wxdata);
+
+			alert(1);
 		},
 		async wxShare(obj) {
 			// 先config
@@ -89,10 +91,13 @@
 			// 先config
 			await this.wxConfig();
 
+			alert(2);
+
 			// 从后台获取订单信息然后支付
 			var responseData = await axios.post("/weixin/pay/unifiedOrder.html");
 			var data = responseData.data;
 			alert(JSON.stringify(data));
+			alert(data.package);
 
 			Vue.wechat.chooseWXPay({
 				appId: data.appId,
@@ -103,6 +108,10 @@
 				paySign: data.paySign, // 支付签名
 				success: function(res) {
 					alert("支付成功")
+				},
+				fail: function(res) {
+					alert("支付失败")
+					alert(res)
 				}
 			});
 		}

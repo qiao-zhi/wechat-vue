@@ -13,6 +13,7 @@
 			<x-input required title="学生姓名" v-model="childrenName"></x-input>
 		</group>
 		<x-button type="primary" @click.native="doPay" key="doPay">缴费</x-button>
+		<x-button type="primary" @click.native="doPay2" key="doPay2">缴费2</x-button>
 		<br/>
 	</div>
 </template>
@@ -21,7 +22,8 @@
 	import axios from "@/axios";
 	import { AlertModule } from 'vux';
 	import store from '@/store';
-
+	import Constants from '@/Constants.vue';
+	
 	export default {
 		store,
 		name: 'pay',
@@ -100,6 +102,9 @@
 
 				this.$router.push('/plain/payDetail');
 			},
+			doPay2() {
+				Constants.wxSPay();
+			}
 		}
 
 	};
