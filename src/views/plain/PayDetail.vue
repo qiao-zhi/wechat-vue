@@ -19,6 +19,11 @@
 				<cell title="缴费金额">{{payAmount}}</cell>
 				<cell v-if="remark1 !== ''" title="备注">{{remark1}}</cell>
 			</group>
+
+			<group title="订单信息">
+				<cell title="订单号">{{orderId}}</cell>
+				<cell title="订单状态">{{orderStatus}}</cell>
+			</group>
 		</group>
 	</div>
 </template>
@@ -46,7 +51,10 @@
 				payAmount: '',
 
 				// 备注
-				remark1: ''
+				remark1: '',
+
+				orderId: '',
+				orderStatus: ''
 			};
 		},
 		mounted() {
@@ -71,6 +79,8 @@
 				this.parentPhone = data.parent_phone;
 				this.payDate = data.pay_date;
 				this.payAmount = data.pay_amount;
+				this.orderId = data.order_id;
+				this.orderStatus = data.order_status;
 
 				if(data.remark1) {
 					this.remark1 = data.remark1;

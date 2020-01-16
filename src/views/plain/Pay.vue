@@ -13,7 +13,6 @@
 			<x-input required title="学生姓名" v-model="childrenName"></x-input>
 		</group>
 		<x-button type="primary" @click.native="doPay" key="doPay">缴费</x-button>
-		<x-button type="primary" @click.native="doPay2" key="doPay2">缴费2</x-button>
 		<br/>
 	</div>
 </template>
@@ -21,11 +20,9 @@
 <script>
 	import axios from "@/axios";
 	import { AlertModule } from 'vux';
-	import store from '@/store';
 	import Constants from '@/Constants.vue';
-	
+
 	export default {
-		store,
 		name: 'pay',
 		data() {
 			return {
@@ -74,7 +71,7 @@
 					return;
 				}
 
-				var response = await axios.post('/pay/doAddJSON.html', {
+				var response = await axios.post('/pay/unifiedOrder.html', {
 					kindergartenId: this.kindergartenId,
 					kindergartenName: this.kindergartenName,
 					version: this.version,
@@ -89,21 +86,9 @@
 				});
 
 				if(response.success) {
-					this.$vux.toast.text("缴费成功,您可以点击右上角分享至朋友圈");
-
-					this.kindergartenId = "";
-					this.kindergartenName = "";
-
-					this.detailPay(response.data.id);
+					// 统一下订单
+					Constants.wxSPay(response.data);
 				}
-			},
-			async detailPay(id) {
-				store.dispatch("setPayIdFun", id);
-
-				this.$router.push('/plain/payDetail');
-			},
-			doPay2() {
-				Constants.wxSPay();
 			}
 		}
 
