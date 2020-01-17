@@ -5,7 +5,7 @@
 
 			<router-view class="router-view"></router-view>
 
-			<tabbar slot="bottom">
+			<tabbar slot="bottom" v-transfer-dom>
 				<tabbar-item link="/plain/pays" selected>
 					<span slot="icon"><i class="icono-list"></i></span>
 					<span slot="label">缴费明细</span>

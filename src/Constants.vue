@@ -91,6 +91,9 @@
 			// 先config
 			await this.wxConfig();
 
+			// 将_this指向当前vm对象
+			const _this = this;
+
 			Vue.wechat.chooseWXPay({
 				appId: data.appId,
 				timestamp: data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
@@ -99,20 +102,13 @@
 				signType: data.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
 				paySign: data.paySign, // 支付签名
 				success: function(res) {
-					alert("支付成功" + data.payId)
-					detailPay(data.payId);
+					// 支付成功跳转路由(路由push无效)
+					window.location.href = "http://ynpxwl.cn/#/plain/pays";
 				},
 				fail: function(res) {
 					alert("支付失败")
 				}
 			});
-		},
-		// 查询支付详情
-		async detailPay(id) {
-			alert(id);
-			store.dispatch("setPayIdFun", id);
-
-			this.$router.push('/plain/payDetail');
 		}
 	};
 </script>

@@ -25,7 +25,7 @@
 		</group>
 
 		<div v-transfer-dom>
-			<confirm v-model="showPhone" ref="showPhone" show-input title="电话" @on-confirm="onConfirmPhone" @on-show="onShowPhone">
+			<confirm v-model="showPhone" ref="showPhone" show-input title="电话" :input-attrs="{type: 'number'}" @on-confirm="onConfirmPhone" @on-show="onShowPhone">
 			</confirm>
 			<confirm v-model="showFullname" ref="showFullname" show-input title="姓名" @on-confirm="onConfirmFullname" @on-show="onShowFullname">
 			</confirm>
@@ -92,6 +92,17 @@
 				this.$refs.showPhone.setInputValue(this.phone);
 			},
 			async onConfirmPhone(value) {
+				if(!value) {
+					this.$vux.toast.text('值不能为空');
+					return;
+				}
+
+				const matchReg = /^[1][3,4,5,7,8][0-9]{9}$/;
+				if(!value.match(matchReg)) {
+					this.$vux.toast.text('电话不合法');
+					return;
+				}
+
 				await axios.post('/user/updateLoginUser.html', {
 					phone: value
 				});
@@ -111,6 +122,11 @@
 				this.$refs.showChildrenname.setInputValue(this.childrenname);
 			},
 			async onConfirmChildrenname(value) {
+				if(!value) {
+					this.$vux.toast.text('值不能为空');
+					return;
+				}
+
 				await axios.post('/user/updateLoginUser.html', {
 					childrenname: value
 				});
@@ -152,6 +168,11 @@
 				this.$refs.showFullname.setInputValue(this.fullname);
 			},
 			async onConfirmFullname(value) {
+				if(!value) {
+					this.$vux.toast.text('值不能为空');
+					return;
+				}
+
 				await axios.post('/user/updateLoginUser.html', {
 					fullname: value
 				});
@@ -160,7 +181,6 @@
 
 				this.$vux.toast.text('修改成功');
 				this.$refs.showFullname.setInputValue('');
-
 			},
 		}
 	};

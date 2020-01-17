@@ -2,7 +2,7 @@
 	<div class="payDetail">
 		<group title="缴费明细">
 			<group title="幼儿园信息">
-				<cell title="名称">{{name}}</cell>
+				<cell title="名称">{{kindergartenName}}</cell>
 				<cell title="服务商">{{server}}</cell>
 				<cell title="版本">{{version}}</cell>
 				<cell title="应收金额">{{amount}}</cell>
@@ -36,7 +36,7 @@
 		store,
 		data() {
 			return {
-				name: '',
+				kindergarteName: '',
 				server: '',
 				version: '',
 				amount: '',
@@ -66,21 +66,21 @@
 				var response = await axios.post('/pay/detailCus/' + payId);
 
 				var data = response.data;
-				this.name = data.kindergarten_name;
+				this.kindergartenName = data.kindergartenName;
 				this.server = data.server;
 				this.version = data.version;
 				this.amount = data.amount;
 
 				this.semester = data.semester;
 				this.grade = data.grade;
-				this.classNum = data.class_num;
-				this.childrenName = data.children_name;
-				this.parentName = data.parent_name;
-				this.parentPhone = data.parent_phone;
-				this.payDate = data.pay_date;
-				this.payAmount = data.pay_amount;
-				this.orderId = data.order_id;
-				this.orderStatus = data.order_status;
+				this.classNum = data.classNum;
+				this.childrenName = data.childrenName;
+				this.parentName = data.parentName;
+				this.parentPhone = data.parentPhone;
+				this.payDate = data.payDate;
+				this.payAmount = data.payAmount;
+				this.orderId = data.orderId;
+				this.orderStatus = data.orderStatus;
 
 				if(data.remark1) {
 					this.remark1 = data.remark1;

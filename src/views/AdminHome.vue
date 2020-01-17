@@ -5,7 +5,7 @@
 
 			<router-view/>
 
-			<tabbar slot="bottom">
+			<tabbar slot="bottom" v-transfer-dom>
 				<tabbar-item link="/admin/kindergarten" selected>
 					<span slot="icon"><i class="icono-file"></i></span>
 					<span slot="label">幼儿园列表</span>

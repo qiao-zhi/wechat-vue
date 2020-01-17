@@ -15,17 +15,15 @@ import { Actionsheet } from 'vux'
 import { Confirm } from 'vux'
 import { Scroller } from 'vux'
 import { Popup } from 'vux'
-import { TransferDom } from 'vux'
 import { ViewBox } from 'vux'
 import { Selector } from 'vux'
 import { Search } from 'vux'
-import  { ConfirmPlugin } from 'vux'
+import { ConfirmPlugin } from 'vux'
 
 Vue.use(ConfirmPlugin)
 Vue.component('search', Search)
 Vue.component('selector', Selector)
 Vue.component('view-box', ViewBox)
-Vue.component('TransferDom', TransferDom)
 Vue.component('popup', Popup)
 Vue.component('scroller', Scroller)
 Vue.component('confirm', Confirm)
@@ -39,6 +37,9 @@ Vue.component('x-header', XHeader)
 Vue.component('group', Group)
 Vue.component('x-input', XInput)
 Vue.component('x-button', XButton)
+
+import { TransferDom } from 'vux'
+Vue.directive('transfer-dom', TransferDom)
 
 // 引入微信对接模块
 import { WechatPlugin } from 'vux'
