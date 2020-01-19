@@ -7,8 +7,10 @@
 			<div id="fullnameDiv" @click="changeShowFullname">
 				<cell title="姓名" is-link>{{fullname}}</cell>
 			</div>
-			<cell title="性别">{{sex}}</cell>
-			<cell title="地址">{{wechataddress}}</cell>
+			<popup-radio title="性别" :options="sexList" v-model="sex" @on-hide="hideSex"></popup-radio>
+			<div id="addressDiv" @click="changeShowAddress">
+				<cell title="地址" is-link>{{wechataddress}}</cell>
+			</div>
 			<div id="phoneDiv" @click="changeShowPhone">
 				<cell title="电话" is-link>{{phone}}</cell>
 			</div>
@@ -24,12 +26,18 @@
 			<cell title="优惠金额">{{coupon}}</cell>
 		</group>
 
+		<group title="人工服务电话<a href='tel:18008726392'>18008726392</a>" label-align="left" label-width="80px" key="prompt">
+			<br />
+		</group>
+
 		<div v-transfer-dom>
 			<confirm v-model="showPhone" ref="showPhone" show-input title="电话" :input-attrs="{type: 'number'}" @on-confirm="onConfirmPhone" @on-show="onShowPhone">
 			</confirm>
 			<confirm v-model="showFullname" ref="showFullname" show-input title="姓名" @on-confirm="onConfirmFullname" @on-show="onShowFullname">
 			</confirm>
 			<confirm v-model="showChildrenname" ref="showChildrenname" show-input title="孩子姓名" @on-confirm="onConfirmChildrenname" @on-show="onShowChildrenname">
+			</confirm>
+			<confirm v-model="showAddress" ref="showAddress" show-input title="地址" @on-confirm="onConfirmAddress" @on-show="onShowAddress">
 			</confirm>
 		</div>
 
@@ -48,7 +56,10 @@
 
 				fullname: '',
 				wechatnickname: '',
+
 				sex: '',
+				sexList: ['男', '女'],
+
 				wechataddress: '',
 				phone: '',
 				childrenname: '',
@@ -59,7 +70,8 @@
 
 				showFullname: false,
 				showPhone: false,
-				showChildrenname: false
+				showChildrenname: false,
+				showAddress: false
 			}
 		},
 		mounted: async function() {
@@ -182,6 +194,36 @@
 				this.$vux.toast.text('修改成功');
 				this.$refs.showFullname.setInputValue('');
 			},
+
+			// 修改用户地址
+			changeShowAddress() {
+				this.showAddress = !this.showAddress;
+			},
+			onShowAddress() {
+				this.$refs.showAddress.setInputValue(this.wechataddress);
+			},
+			async onConfirmAddress(value) {
+				if(!value) {
+					this.$vux.toast.text('值不能为空');
+					return;
+				}
+
+				await axios.post('/user/updateLoginUser.html', {
+					wechataddress: value
+				});
+
+				this.wechataddress = value;
+
+				this.$vux.toast.text('修改成功');
+				this.$refs.showAddress.setInputValue('');
+			},
+
+			// 隐藏修改性别窗口时候异步请求修改性别
+			hideSex() {
+				axios.post('/user/updateLoginUser.html', {
+					sex: this.sex
+				});
+			}
 		}
 	};
 </script>

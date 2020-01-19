@@ -55,7 +55,7 @@
 
 				// 页号一直是1，增加页大小
 				pageNum: 1,
-				pageSize: 0,
+				pageSize: 6,
 				keywords: '',
 
 				//标记是否在取数据
@@ -93,6 +93,7 @@
 				} else if(this.onFetching) {
 					this.$vux.toast.text("正在加载中");
 				} else {
+					this.pageSize += 6;
 					this.onFetching = true;
 					this.loadMore();
 				}
@@ -100,7 +101,6 @@
 			async loadMore() {
 				var url = "/kindergarten/pageJSON.html";
 
-				this.pageSize += 6;
 				var response = await axios.post(url, {
 					pageNum: this.pageNum,
 					pageSize: this.pageSize,

@@ -1,10 +1,13 @@
 <script>
 	import axios from "@/axios";
 	import Vue from 'vue';
+	import { AlertModule } from 'vux';
 	import store from '@/store';
 
 	export default {
 		store,
+		// 是否是开发模式
+		devModel: true,
 		name: 'Constants',
 		// 项目的根路径(加api的会被代理请求，用于处理ajax请求)
 		projectBaseAddress: '/api',
@@ -109,6 +112,17 @@
 					alert("支付失败")
 				}
 			});
+		},
+		isNotBlank(value, fieldRemark) {
+			if(!value) {
+				AlertModule.show({
+					title: "提示信息",
+					content: fieldRemark + "不能为空"
+				});
+				return false;
+			}
+
+			return true;
 		}
 	};
 </script>

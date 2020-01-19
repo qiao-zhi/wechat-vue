@@ -2,6 +2,9 @@
 	<div>
 		<search placeholder="关键字" position="absolute" @on-change="loadMore" auto-scroll-to-top top="46px" v-model="keywords"></search>
 
+		<group title="人工服务电话<a href='tel:18008726392'>18008726392</a>" label-align="left" label-width="80px" key="prompt">
+		</group>
+
 		<scroller :bounce=false ref="scrollerBottom" @on-scroll="onScroll" @on-scroll-bottom="onScrollBottom" height="-117px;" use-pullup :pullup-config="pullupDefaultConfig">
 			<div style="padding: 10px 0">
 				<group title="缴费列表">
@@ -42,7 +45,7 @@
 
 				// 页号一直是1，增加页大小
 				pageNum: 1,
-				pageSize: 0,
+				pageSize: 6,
 				keywords: '',
 
 				//标记是否在取数据
@@ -70,6 +73,7 @@
 				} else if(this.onFetching) {
 					this.$vux.toast.text("正在加载中");
 				} else {
+					this.pageSize += 6;
 					this.onFetching = true;
 					this.loadMore();
 				}
@@ -77,7 +81,6 @@
 			async loadMore() {
 				var url = "/pay/pageJSON2.html";
 
-				this.pageSize += 6;
 				var response = await axios.post(url, {
 					pageNum: this.pageNum,
 					pageSize: this.pageSize,

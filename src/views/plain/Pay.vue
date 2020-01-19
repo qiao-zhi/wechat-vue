@@ -63,11 +63,8 @@
 		},
 		methods: {
 			async doPay() {
-				if(this.kindergartenId == '' || this.kindergartenName == '' || this.version == '' || this.server == '' || this.semester == '' || this.grade == '' || this.classNum == '' || this.parentName == '' || this.parentPhone == '' || this.childrenName == '' || this.payAmount == '') {
-					AlertModule.show({
-						title: "提示信息",
-						content: "请检查必填字段"
-					});
+				if(!Constants.isNotBlank(this.kindergartenId, "幼儿园") || !Constants.isNotBlank(this.semester, "学期") || !Constants.isNotBlank(this.grade, "年级") ||
+					!Constants.isNotBlank(this.classNum, "班级") || !Constants.isNotBlank(this.parentPhone, "家长电话") || !Constants.isNotBlank(this.childrenName, "学生姓名")) {
 					return;
 				}
 

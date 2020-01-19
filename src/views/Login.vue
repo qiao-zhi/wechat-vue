@@ -2,10 +2,10 @@
 	<div class="login">
 		<form v-if="!isReg">
 			<group title="登录" label-align="left" label-width="80px" key="login">
-				<x-input required text-align="left" title="用户名" placeholder="Input username" v-model="username"></x-input>
-				<x-input required text-align="left" title="密    码" placeholder="Input password" type="password" v-model="password"></x-input>
+				<x-input required text-align="left" title="用户名" placeholder="建议微信登录" v-model="username"></x-input>
+				<x-input required text-align="left" title="密    码" placeholder="建议微信登录" type="password" v-model="password"></x-input>
 			</group>
-			<x-button action-type="button" type="primary" @click.native="login()" key="loginBtn">登录</x-button>
+			<x-button action-type="button" type="default" @click.native="login()" key="loginBtn">登录</x-button>
 			<!--<br/>
 			<x-button action-type="button" type="default" @click.native="reg()" key="regBtn" plain>注册</x-button>-->
 			<br/>
